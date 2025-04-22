@@ -65,7 +65,7 @@ const fetchPost = async () => {
     const res = await axiosInstance.get(
       `/posts`
     )
-    console.log('passou nessa jossa', res.data.data)
+  
     post.value = res.data.data
   } catch (error) {
     console.error('Erro ao buscar post:', error)
@@ -83,5 +83,6 @@ onMounted( ()=>{
 /* Se quiser deixar a tipografia ainda mais clean */
 .prose {
   font-family: 'Inter', sans-serif;
+
 }
 </style>

@@ -1,8 +1,26 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-import router from './router';
+import router from './router'
+import Toast, { POSITION } from 'vue-toastification' // ✅ Aqui está o POSITION
+import 'vue-toastification/dist/index.css'
 
-const app = createApp(App);
-app.use(router);
-app.mount('#app');
+const app = createApp(App)
+
+app.use(Toast, {
+  timeout: 3000,
+  position: POSITION.TOP_CENTER,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnFocusLoss: true,
+  pauseOnHover: true,
+  draggable: true,
+  draggablePercent: 0.6,
+  showCloseButtonOnHover: false,
+  icon: '💜',
+  toastClassName: 'custom-toast',
+})
+
+app.use(router)
+app.mount('#app')
+
