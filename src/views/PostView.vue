@@ -8,15 +8,26 @@
     </div>
 
     <div v-else>
-      <div v-for="(item, index) in post" :key="index">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4 leading-tight">
-        {{ item?.title }}
-      </h1>
-      <p class="text-md">
-        {{ item.content }}
-      </p>
-      <p class="text.xs pt-12">{{ formatDate(item.publishedAt) }}</p>
-      </div>
+      <div
+  v-for="(item, index) in post"
+  :key="index"
+  @click="$router.push(`/posts/${item.slug}`)"
+  class="bg-white border border-purple-300 rounded-xl shadow-md p-6 mb-8 transition-transform transform hover:scale-105 hover:shadow-lg duration-300 cursor-pointer"
+>
+  <h1 class="text-xl font-extrabold text-indigo-600 text-center mb-4 leading-snug">
+    {{ item.title }}
+  </h1>
+  <p class="text-sm text-gray-700 font-semibold leading-relaxed">
+    {{ item.content }}
+  </p>
+  <div class="text-right mt-8">
+    <p class="text-xs text-purple-400 italic">
+      {{ formatDate(item.publishedAt) }}
+    </p>
+  </div>
+</div>
+
+
       <!-- Título -->
      <div></div>
 
@@ -83,6 +94,5 @@ onMounted( ()=>{
 /* Se quiser deixar a tipografia ainda mais clean */
 .prose {
   font-family: 'Inter', sans-serif;
-
 }
 </style>

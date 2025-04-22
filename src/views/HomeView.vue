@@ -8,29 +8,29 @@
     </header>
 
     <!-- Cards de notícias -->
-    <main class="max-w-7xl mx-auto px-4 py-12">
-      <h2 class="text-3xl font-bold mb-8 text-gray-800">Últimas Notícias</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <router-link
-          v-for="(item, index) in fakePosts"
-          :key="index"
-          :to="`/posts/${item.slug}`"
-          class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
-        >
-          <img
-            :src="item.image"
-            :alt="item.title"
-            class="w-full h-48 object-cover"
-          />
-          <div class="p-5">
-            <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ item.title }}</h3>
-            <p class="text-sm text-gray-600 mb-4">{{ item.excerpt }}</p>
-            <p class="text-xs text-gray-500">{{ item.date }}</p>
-            <span class="mt-4 text-sm text-blue-600 hover:underline font-medium block">Ver mais →</span>
-          </div>
-        </router-link>
-      </div>
-    </main>
+  <main class="max-w-7xl mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold mb-8 text-gray-800">Últimas Notícias</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <router-link
+        v-for="(item, index) in fakePosts"
+        :key="index"
+        :to="item.route"
+        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 block"
+      >
+        <img
+          :src="item.image"
+          :alt="item.title"
+          class="w-full h-48 object-cover"
+        />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ item.title }}</h3>
+          <p class="text-sm text-gray-600 mb-4">{{ item.excerpt }}</p>
+          <p class="text-xs text-gray-500">{{ item.date }}</p>
+          <span class="mt-4 text-sm text-blue-600 hover:underline font-medium block">Ver mais →</span>
+        </div>
+      </router-link>
+    </div>
+  </main>
   </div>
 </template>
 
@@ -124,21 +124,23 @@ const fakePosts = [
     slug: 'lancado-novo-recurso-vuejs',
     title: 'Lançado novo recurso no Vue.js',
     excerpt: 'A nova versão do Vue traz melhorias significativas de performance e novas APIs para desenvolvedores.',
-    image: 'https://via.placeholder.com/800x600.png?text=Vue.js',
+    image: 'https://static-00.iconduck.com/assets.00/vue-icon-1024x1024-8qwdup5l.png',
     date: '20 de abril de 2025',
+    route: '/posts', // vai para posts
   },
   {
     slug: 'atualizacao-no-strapi-cms',
     title: 'Atualização no Strapi CMS',
     excerpt: 'A plataforma Strapi agora suporta ainda mais integrações com serviços externos, além de melhorias no editor.',
-    image: 'https://source.unsplash.com/800x600/?news',
+    image: 'https://media.licdn.com/dms/image/C4D12AQGDy4sVaFDZmg/article-cover_image-shrink_600_2000/0/1599703763095?e=2147483647&v=beta&t=dUcslE6MeV5t-COkjc3jl6aRRV-5P8aGTdJpcJoCGlk',
     date: '18 de abril de 2025',
+    route: '/midia', // vai para página mídia
   },
   {
     slug: 'design-responsivo-em-alta',
     title: 'Design Responsivo em Alta',
     excerpt: 'Tendência de 2025 foca na acessibilidade e experiência do usuário em diferentes dispositivos.',
-    image: 'https://source.unsplash.com/800x600/?design',
+    image: 'https://viverdeblog.com/wp-content/uploads/2017/04/thumbnail-design-responsivo.png',
     date: '17 de abril de 2025',
   }
 ]
@@ -163,7 +165,7 @@ const fakePosts = [
   top: 0;
   z-index: -2;
   transform: translate3d(0, 0, 0) scale(1.25);
-  background: black url('https://images.unsplash.com/photo-1531971085967-431db1ec65a2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=212d5ac2d6b763d2f2168d4f0a85b36c&auto=format&fit=crop&w=2250&q=80') no-repeat center center;
+  background: black url('https://static.vecteezy.com/ti/vetor-gratis/p2/13546201-projetor-holografico-de-mapa-do-mundo-moderno-em-fundo-de-tecnologia-vetor.jpg') no-repeat center center;
   background-size: cover;
 }
 
@@ -182,7 +184,7 @@ const fakePosts = [
   margin: 0;
   line-height: 40rem;
   text-transform: uppercase;
-  text-shadow: 0 0 .3rem black;
+  text-shadow: 0 0 .3rem white;
   font-size: 2em;
   font-weight: bolder;
 }
