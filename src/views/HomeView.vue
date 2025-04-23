@@ -157,6 +157,11 @@ const fakePosts = [
   backface-visibility: hidden;
 }
 
+.page {
+  margin-left: 80px; /* mesma largura da sidebar */
+}
+
+
 .banner .background {
   width: 100%;
   height: 100%;

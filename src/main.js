@@ -4,6 +4,10 @@ import App from './App.vue'
 import router from './router'
 import Toast, { POSITION } from 'vue-toastification' // ✅ Aqui está o POSITION
 import 'vue-toastification/dist/index.css'
+import 'font-awesome/css/font-awesome.min.css'
+
+
+
 
 const app = createApp(App)
 
