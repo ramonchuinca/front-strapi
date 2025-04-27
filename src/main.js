@@ -5,6 +5,8 @@ import router from './router'
 import Toast, { POSITION } from 'vue-toastification' // ✅ Aqui está o POSITION
 import 'vue-toastification/dist/index.css'
 import 'font-awesome/css/font-awesome.min.css'
+// import '@fortawesome/fontawesome-free/css/all.min.css'
+
 
 
 
