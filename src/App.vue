@@ -8,14 +8,20 @@
 <nav :class="['sidebar-navigation', { collapsed: isCollapsed }]">
 
       <ul>
-        <li class="active">
-          <i class="fa fa-home"></i>
-          <span class="tooltip">Home</span>
-        </li>
-        <li>
-          <i class="fa fa-hdd-o"></i>
-          <span class="tooltip">Devices</span>
-        </li>
+        <router-link to="/">
+          <li class="active">
+            <i class="fa fa-home"></i>
+            <span class="tooltip">Home</span>
+          </li>
+        </router-link>
+        
+        <router-link to="/Posts">
+          <li>
+            <i class="fa fa-hdd-o"></i>
+            <span class="tooltip">Posts</span>
+          </li>
+        </router-link>
+        
         <li>
           <i class="fa fa-newspaper-o"></i>
           <span class="tooltip">Contacts</span>
