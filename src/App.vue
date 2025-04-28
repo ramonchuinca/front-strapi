@@ -38,7 +38,7 @@
 
       <div class="navegações">
         <router-link to="/">Home</router-link>
-        <router-link to="/Posts">Posts</router-link>
+        <!-- <router-link to="/Posts">Posts</router-link> -->
         <router-link to="/Midia">Midia</router-link>
       </div>
     </nav>

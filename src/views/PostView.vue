@@ -1,98 +1,103 @@
 <template>
-    <div class="max-w-3xl mx-auto px-4 py-10">
-      <div v-if="loading" class="flex justify-center items-center h-60">
-        <svg class="animate-spin h-10 w-10 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
-        </svg>
+  <div v-if="!loading">
+    <!-- Seu conteúdo aqui -->
+    <div
+      ref="carousel"
+      class="grid gap-6 p-4 no-scrollbar overflow-x-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+    >
+      <div
+        v-for="(item, index) in post"
+        :key="index"
+        class="bg-white rounded-xl shadow-md p-6 hover:scale-105 transition-transform duration-300 cursor-pointer"
+      >
+        <router-link :to="`/posts/${item.id}`">
+          <div>
+            <h1 class="text-lg font-extrabold text-indigo-600 text-center mb-4">
+              {{ item.title }}
+            </h1>
+            <p class="text-gray-700 text-sm font-semibold leading-relaxed">
+              {{ item.content }}
+            </p>
+            <p class="text-right text-xs text-purple-400 italic mt-6">
+              {{ formatDate(item.publishedAt) }}
+            </p>
+          </div>
+        </router-link>
       </div>
-  
-      <div v-else>
-        <div
-    v-for="(item, index) in post"
-    :key="index"
-    @click="$router.push(`/posts`)"
-    class="bg-white border border-purple-300 rounded-xl shadow-md p-6 mb-8 transition-transform transform hover:scale-105 hover:shadow-lg duration-300 cursor-pointer"
-  >
-    <h1 class="text-xl font-extrabold text-indigo-600 text-center mb-4 leading-snug">
-      {{ item.title }}
-    </h1>
-    <p class="text-sm text-gray-700 font-semibold leading-relaxed">
-      {{ item.content }}
-    </p>
-    <div class="text-right mt-8">
-      <p class="text-xs text-purple-400 italic">
-        {{ formatDate(item.publishedAt) }}
-      </p>
     </div>
   </div>
-  
-  
-        <!-- Título -->
-       <div></div>
-  
-        <!-- Data de publicação -->
-  
-  
-        <!-- Imagem de capa -->
-        <img
-          v-if="post?.attributes?.coverImage?.data"
-          :src="getImageUrl(post.attributes.coverImage.data.attributes.url)"
-          :alt="post.attributes.title"
-          class="rounded-lg w-full max-h-[500px] object-cover mb-8 shadow"
-        />
-  
-        <!-- Conteúdo do post -->
-        <div
-          class="prose max-w-none prose-p:leading-relaxed prose-img:rounded-md prose-headings:text-gray-800 prose-a:text-blue-600 hover:prose-a:underline"
-          v-html="post?.attributes?.content"
-        />
-      </div>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from 'vue'
-  import { useRoute } from 'vue-router'
-  import axiosInstance from '../utils/axios'
-  
-  const route = useRoute()
-  const post = ref(null)
-  const loading = ref(true)
-  
-  const getImageUrl = (url) => `http://localhost:1337${url}`
-  
-  const formatDate = (isoString) => {
-    const date = new Date(isoString)
-    return date.toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
-    })
-  }
-  
-  const fetchPost = async () => {
-    try {
-      const res = await axiosInstance.get(
-  `/posts`)
-    
-      post.value = res.data.data
-    } catch (error) {
-      console.error('Erro ao buscar post:', error)
-    } finally {
-      loading.value = false
-    }
-  }
-  
-  onMounted( ()=>{
-    fetchPost()
+  <div v-else>
+    <!-- Aqui você pode mostrar um indicador de carregamento enquanto aguarda os posts -->
+    <p>Carregando...</p>
+  </div>
+</template>
+
+
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import axiosInstance from '../utils/axios'
+
+const post = ref([])
+const loading = ref(true)
+const carousel = ref(null)
+let autoplayInterval = null
+
+const scrollLeft = () => {
+  carousel.value.scrollBy({ left: -300, behavior: 'smooth' })
+}
+
+const scrollRight = () => {
+  carousel.value.scrollBy({ left: 300, behavior: 'smooth' })
+}
+
+const startAutoplay = () => {
+  autoplayInterval = setInterval(() => {
+    scrollRight()
+  }, 3000)
+}
+
+const stopAutoplay = () => {
+  clearInterval(autoplayInterval)
+}
+
+const formatDate = (isoString) => {
+  const date = new Date(isoString)
+  return date.toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
   })
-  </script>
-  
-  <style scoped>
-  /* Se quiser deixar a tipografia ainda mais clean */
-  .prose {
-    font-family: 'Inter', sans-serif;
+}
+
+const fetchPost = async () => {
+  try {
+    const res = await axiosInstance.get('/posts')
+    post.value = res.data.data
+    console.log('Posts recebidos:', post.value) // Verifique no console
+  } catch (error) {
+    console.error('Erro ao buscar posts:', error)
+  } finally {
+    loading.value = false
   }
-  </style>
-  
+}
+
+
+onMounted(() => {
+  fetchPost()
+  startAutoplay()
+})
+
+onBeforeUnmount(() => {
+  stopAutoplay()
+})
+</script>
+
+<style scoped>
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>
