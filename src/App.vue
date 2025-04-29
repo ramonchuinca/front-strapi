@@ -15,17 +15,23 @@
           </li>
         </router-link>
         
-        <router-link to="/Posts">
+        <router-link to="/Midia">
           <li>
             <i class="fa fa-hdd-o"></i>
-            <span class="tooltip">Posts</span>
+            <span class="tooltip">Midia</span>
           </li>
         </router-link>
-        
+
+
+        <router-link to="/Posts">
         <li>
           <i class="fa fa-newspaper-o"></i>
-          <span class="tooltip">Contacts</span>
+          <span class="tooltip">Posts</span>
         </li>
+      </router-link>
+
+
+
         <li>
           <i class="fa fa-print"></i>
           <span class="tooltip">Fax</span>
@@ -36,11 +42,11 @@
         </li>
       </ul>
 
-      <div class="navegações">
-        <router-link to="/">Home</router-link>
+      <!-- <div class="navegações"> -->
+        <!-- <router-link to="/">Home</router-link> -->
         <!-- <router-link to="/Posts">Posts</router-link> -->
-        <router-link to="/Midia">Midia</router-link>
-      </div>
+        <!-- <router-link to="/Midia">Midia</router-link> -->
+      <!-- </div> -->
     </nav>
 
     <RouterView />

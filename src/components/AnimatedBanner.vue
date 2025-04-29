@@ -2,7 +2,7 @@
     <header ref="banner" class="banner">
       <canvas ref="canvas" class="bubble-canvas"></canvas>
       <span class="background"></span>
-      <h1 class="title" :class="{ show: showTitle }">Pen6</h1>
+      <h1 class="title" :class="{ show: showTitle }">teste-component</h1>
     </header>
   </template>
   

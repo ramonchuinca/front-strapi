@@ -15,7 +15,7 @@
         v-for="(item, index) in fakePosts"
         :key="index"
         :to="item.route"
-        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 block"
+        class="bg-[#54308A] rounded-xl shadow-md p-3 w-80  text-white "
       >
         <img
           :src="item.image"
@@ -23,10 +23,10 @@
           class="w-full h-48 object-cover"
         />
         <div class="p-5">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ item.title }}</h3>
-          <p class="text-sm text-gray-600 mb-4">{{ item.excerpt }}</p>
-          <p class="text-xs text-gray-500">{{ item.date }}</p>
-          <span class="mt-4 text-sm text-blue-600 hover:underline font-medium block">Ver mais →</span>
+          <h3 class="text-xl font-semibold text-[#55c3c0] -800 mb-2">{{ item.title }}</h3>
+          <p class="text-sm text-white-600 mb-4">{{ item.excerpt }}</p>
+          <p class="text-xs text-white-500">{{ item.date }}</p>
+          <span class="mt-4 text-sm text-[#55c3c0] -800 hover:underline font-medium block">Ver mais →</span>
         </div>
       </router-link>
     </div>
@@ -213,11 +213,11 @@ html {
   font-size: 62.5%;
 }
 
-body {
+/* body {
   margin: 0;
   opacity: 0;
   font: 1.6rem/1.875 'Avenir Next', sans-serif;
-}
+} */
 
 body.loaded {
   opacity: 1;
