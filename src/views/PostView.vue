@@ -9,15 +9,20 @@
         :key="index"
         class="card"
       >
-        <i :class="`fab ${item.icon}`"></i>
+        <!-- Bolinha com imagem ao invés de ícone -->
+        <div class="card-image-circle">
+          <img :src="getImageUrl(item.coverImage)" alt="Imagem do post" />
+        </div>
         <h1>{{ item.title }}</h1>
         <p>{{ item.content }}</p>
       </div>
     </div>
   </div>
   <div v-else>
+    <!-- Loading ou Spinner -->
   </div>
 </template>
+
 
 
 
@@ -32,11 +37,15 @@ const carousel = ref(null)
 let autoplayInterval = null
 
 const scrollLeft = () => {
-  carousel.value.scrollBy({ left: -300, behavior: 'smooth' })
+  if (carousel.value) {
+    carousel.value.scrollBy({ left: -300, behavior: 'smooth' })
+  }
 }
 
 const scrollRight = () => {
-  carousel.value.scrollBy({ left: 300, behavior: 'smooth' })
+  if (carousel.value) {
+    carousel.value.scrollBy({ left: 300, behavior: 'smooth' })
+  }
 }
 
 const startAutoplay = () => {
@@ -62,7 +71,7 @@ const fetchPost = async () => {
   try {
     const res = await axiosInstance.get('/posts')
     post.value = res.data.data
-    console.log('Posts recebidos:', post.value) // Verifique no console
+    console.log('Posts recebidos:', post.value)
   } catch (error) {
     console.error('Erro ao buscar posts:', error)
   } finally {
@@ -70,6 +79,13 @@ const fetchPost = async () => {
   }
 }
 
+// Função para retornar URL completa da imagem do Strapi
+const baseURL = 'http://localhost:1337'
+
+const getImageUrl = (image) => {
+  if (!image) return ''
+  return `${baseURL}${image.url}`
+}
 
 onMounted(() => {
   fetchPost()
@@ -79,14 +95,8 @@ onMounted(() => {
 onBeforeUnmount(() => {
   stopAutoplay()
 })
-
-// onMounted(() => {
-//   document.body.classList.add('loaded')
-// })
-
-
-
 </script>
+
 
 <style scoped>
 * {
@@ -95,14 +105,14 @@ onBeforeUnmount(() => {
   box-sizing: border-box;
 }
 
-body {
+/* body {
   background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: Ubuntu;
-}
+} */
 
 .card {
   position: relative;
@@ -116,7 +126,7 @@ body {
   align-items: center;
   transition: .5s;
 }
-.card i {
+/* .card i {
   width: 60px;
   height: 60px;
   border-radius: 50px;
@@ -128,7 +138,26 @@ body {
   top: 80px;
   transition: .5s;
   position: relative;
+} */
+
+.card-image-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: auto;
+  overflow: hidden;
+  background: #55C3C0;
+  position: relative;
+  top: 80px;
+  transition: 0.5s;
 }
+
+.card-image-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .card h1 {
   font-size: 30px;
   color: #fff;
