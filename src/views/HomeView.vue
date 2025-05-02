@@ -151,7 +151,7 @@ const fakePosts = [
 .banner {
   position: relative;
   width: 100%;
-  height: 40rem;
+  height: 50rem;
   padding: 0 5%;
   overflow: hidden;
   backface-visibility: hidden;
