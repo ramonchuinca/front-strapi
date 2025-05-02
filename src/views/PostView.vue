@@ -21,9 +21,8 @@
   <div v-else>
     <!-- Loading ou Spinner -->
   </div>
+  
 </template>
-
-
 
 
 
